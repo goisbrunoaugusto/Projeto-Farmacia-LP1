@@ -1,0 +1,4 @@
+antiinflamatorio 55.5
+avamys 40
+dipirona 20
+ibuprofeno 27.5
