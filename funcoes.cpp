@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <map>
-#include "headerCliente.hpp"
+#include "header.hpp"
 
 using namespace std;
 
@@ -45,19 +45,12 @@ void adicionarArquivoNoMapa()
     }
     file.close();
 }
-
 void imprimirArquivo()
 {
-    string linha;
-    ifstream lerArquivo;
-    lerArquivo.open("Remedios.txt");
-
-    while (getline(lerArquivo, linha))
-    {
-        cout << linha << endl;
-        getline(lerArquivo, linha);
-    }
-    lerArquivo.close();
+    for (auto i:medicamentos){
+        cout << "Nome:" << i.first << "\t";
+        cout << "|| Preço: " << i.second << endl;
+    }    
 }
 void verificarRemedio()
 {
@@ -123,6 +116,53 @@ void apagar()
         if (i.first == deletar)
         {
             carrinhoMap.erase(i.first);
+            break;
+        }
+    }
+}
+void imprimirArquivoGerente()
+{
+    for (auto i:medicamentos){
+        cout << "Nome:" << i.first << "\t";
+        cout << "|| Preço: " << i.second << endl;
+    }   
+}
+void adicionarMedicamento(){
+    string string;
+    double valor;
+    cout << "Digite o nome do medicamento" << endl;
+    cin.ignore();
+    getline(cin, string);
+    cout << "Digite o nome do medicamento" << endl;
+    cin >> valor;
+    medicamentos[string] = valor;
+}
+void atualizarPreco(){
+    double valor;
+    string string;
+    cout << "Digite o nome do medicamento que voce deseja alterar o preço: " << endl;
+    cin.ignore();
+    getline(cin, string);
+    cout << "Digite o valor do preço novo" << endl;
+    cin >> valor;
+    
+    for (auto i:medicamentos){
+        if(i.first == string){
+            medicamentos[i.first] = valor;
+        }
+    }
+}
+void excluirMedicamento(){
+    string string;
+    cout <<"Digite o nome do medicamento que voce deseja excluir: " <<endl;
+    cin.ignore();
+    getline(cin,string);
+
+    for (auto i:medicamentos)
+    {
+        if (i.first == string)
+        {
+            medicamentos.erase(i.first);
             break;
         }
     }

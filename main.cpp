@@ -1,20 +1,17 @@
 #include <iostream>
 #include <fstream>
 #include <map>
-#include "headerCliente.hpp"
-#include "headerGerente.hpp"
+#include "header.hpp"
 
 using namespace std;
 
 int main()
 {
     int perfilId;
+    string admin = "admin";
 
-    ifstream lerArquivo;
     inicializarArquivo();
     adicionarArquivoNoMapa();
-
-    lerArquivo.open("Remedios.txt");
 
     // Seleção do perfil a ser utilizado
     cout << "Qual perfil deseja usar?" << endl;
@@ -25,7 +22,7 @@ int main()
     // Funcionalidades do perfil do Cliente
     if (perfilId == 1)
     {
-        while(true)
+        while (true)
         {
             int funcaoID;
             // Seleçao da funcionalidade desejada
@@ -73,6 +70,55 @@ int main()
     // Funcionalidade do perfil do Gerente
     else if (perfilId == 2)
     {
+        string string;
+        cout << "Digite a senha: " << endl;
+        cin.ignore();
+        getline(cin, string);
+        if (string == admin)
+        {
+
+            while (true)
+            {
+                int funcaoID;
+                cout << "Digite o Id da função desejada: " << endl;
+                cout << "1-- Listar todos os remédios cadastrados e seus respectivos preços " << endl;
+                cout << "2-- Buscar um remédio por nome" << endl;
+                cout << "3-- Adicionar um novo medicamento" << endl;
+                cout << "4-- Atualizar o preço de um determinado remédio" << endl;
+                cout << "5-- Excluir um remédio (buscando pelo nome) " << endl;
+                cout << "6-- Para sair" << endl;
+                cin >> funcaoID;
+
+                if (funcaoID == 1)
+                {
+                    imprimirArquivoGerente();
+                }
+                if (funcaoID == 2)
+                {
+                    verificarRemedio();
+                }
+                if (funcaoID == 3)
+                {
+                    adicionarMedicamento();
+                }
+                if (funcaoID == 4)
+                {
+                    atualizarPreco();
+                }
+                if (funcaoID == 5)
+                {
+                    excluirMedicamento();
+                }
+                if (funcaoID == 6)
+                {
+                    break;
+                }
+            }
+        }
+        else
+        {
+            cout << "Senha errada!" << endl;
+        }
     }
     else
     {
