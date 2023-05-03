@@ -5,46 +5,33 @@
 
 using namespace std;
 
+//Struct salvando quantidade e valor do remedio colocado no carrinho de compras
 struct remedioStruct
 {
     int contador = 0;
     double valor = 0;
 };
-
+//Map do carrinho de compras
 map<string, remedioStruct> carrinhoMap;
-
+//Map dos medicamentos presentes no arquivo
 map<string, double> medicamentos;
 
-void inicializarArquivo()
-{
-    ofstream arquivo;
-    arquivo.open("Remedios.txt");
-    arquivo << "Ibuprofeno" << endl;
-    arquivo << "10.85" << endl;
-    arquivo << "Dorflex" << endl;
-    arquivo << "13.33" << endl;
-    arquivo << "Buscopan" << endl;
-    arquivo << "15.71" << endl;
-    arquivo << "Rivotril" << endl;
-    arquivo << "79.90" << endl;
-    arquivo << "Amoxilina" << endl;
-    arquivo << "71.85" << endl;
-    arquivo.close();
-}
 
+//Função para adicionar os remedios presentes no arquivo, no mapa
 void adicionarArquivoNoMapa()
 {
     ifstream file("Remedios.txt");
-    string medicamento, preco;
-    double precoD;
+    string medicamento, precoString;
+    double precoDouble;
     while (getline(file, medicamento))
     {
-        getline(file, preco);
-        precoD = stod(preco);
-        medicamentos[medicamento] = precoD;
+        getline(file, precoString);
+        precoDouble = stod(precoString);
+        medicamentos[medicamento] = precoDouble;
     }
     file.close();
 }
+//Função para imprimir os itens presentes no arquivo
 void imprimirArquivo()
 {
     for (auto i:medicamentos){
@@ -52,6 +39,7 @@ void imprimirArquivo()
         cout << "|| Preço: " << i.second << endl;
     }    
 }
+//Função para verificar se o remedio está presente no arquivo
 void verificarRemedio()
 {
     ifstream lerArquivo;
@@ -68,16 +56,17 @@ void verificarRemedio()
     {
         if (nomeRemedio.compare(linha) == 0)
         {
-            cout << "Seu remedio esta na lista" << endl;
+            cout << ">>>>> Há estoque do seu remédio <<<<<" << endl;
             c++;
         }
     }
     if (c == 0)
     {
-        cout << "Seu remedio nao esta na lista" << endl;
+        cout << ">>>>> Não há estoque do seu remédio<<<<<" << endl;
     }
     lerArquivo.close();
 }
+//Função para adicionar um remedio ao map do carrinho de compras
 void selecionarRemedio()
 {
     string itemCarrinho;
@@ -96,6 +85,7 @@ void selecionarRemedio()
         }
     }
 }
+//Função para calcular o valor dos itens presentes no map do carrinho de compras
 void calculoCompra()
 {
     double valorTotal = 0, holder;
@@ -105,6 +95,7 @@ void calculoCompra()
     }
     cout << " >>> O valor do seu carrinho é: " << valorTotal << " <<<" << endl;
 }
+//Função para apagar um item do map do carrinho de compras
 void apagar()
 {
     string deletar;
@@ -120,6 +111,7 @@ void apagar()
         }
     }
 }
+//Função para imprimir os itens presentes no arquivo
 void imprimirArquivoGerente()
 {
     for (auto i:medicamentos){
@@ -127,16 +119,18 @@ void imprimirArquivoGerente()
         cout << "|| Preço: " << i.second << endl;
     }   
 }
+//Função para adicionar um medicamento ao map de medicamentos
 void adicionarMedicamento(){
     string string;
     double valor;
     cout << "Digite o nome do medicamento" << endl;
     cin.ignore();
     getline(cin, string);
-    cout << "Digite o nome do medicamento" << endl;
+    cout << "Digite o valor do medicamento" << endl;
     cin >> valor;
     medicamentos[string] = valor;
 }
+//Função para atualizar o preço de um medicamento no map de medicamentos
 void atualizarPreco(){
     double valor;
     string string;
@@ -152,6 +146,7 @@ void atualizarPreco(){
         }
     }
 }
+//Função para excluir um medicamento do map de medicamentos
 void excluirMedicamento(){
     string string;
     cout <<"Digite o nome do medicamento que voce deseja excluir: " <<endl;
@@ -166,4 +161,16 @@ void excluirMedicamento(){
             break;
         }
     }
+}
+//Função para salvar o map medicamento, com as alterações feitas, no arquivo
+void salvarMapNoArquivo(){
+    ofstream arquivo;
+    arquivo.open("Remedios.txt");
+
+    for (auto i: medicamentos){
+        arquivo << i.first << "\n";
+        arquivo << i.second << "\n";
+    }
+
+    arquivo.close();
 }

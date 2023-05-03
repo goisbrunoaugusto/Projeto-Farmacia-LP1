@@ -10,7 +10,6 @@ int main()
     int perfilId;
     string admin = "admin";
 
-    inicializarArquivo();
     adicionarArquivoNoMapa();
 
     // Seleção do perfil a ser utilizado
@@ -42,27 +41,34 @@ int main()
             }
 
             // Funcao 2
-            if (funcaoID == 2)
+            else if (funcaoID == 2)
             {
                 verificarRemedio();
             }
             // Funcao 3
-            if (funcaoID == 3)
+            else if (funcaoID == 3)
             {
                 selecionarRemedio();
             }
             // Funcao 4
-            if (funcaoID == 4)
+            else if (funcaoID == 4)
             {
                 calculoCompra();
             }
             // Funcao 5
-            if (funcaoID == 5)
+            else if (funcaoID == 5)
             {
                 apagar();
             }
-            if (funcaoID == 6)
+            else if (funcaoID == 6)
             {
+                salvarMapNoArquivo();
+                break;
+            }
+            else
+            {
+                salvarMapNoArquivo();
+                cout << "Opção inválida.";
                 break;
             }
         }
@@ -71,15 +77,18 @@ int main()
     else if (perfilId == 2)
     {
         string string;
+        // Requisição de senha
         cout << "Digite a senha: " << endl;
         cin.ignore();
         getline(cin, string);
+        // Se a senha for a certa
         if (string == admin)
         {
 
             while (true)
             {
                 int funcaoID;
+                // Seleçao da funcionalidade desejada
                 cout << "Digite o Id da função desejada: " << endl;
                 cout << "1-- Listar todos os remédios cadastrados e seus respectivos preços " << endl;
                 cout << "2-- Buscar um remédio por nome" << endl;
@@ -88,38 +97,52 @@ int main()
                 cout << "5-- Excluir um remédio (buscando pelo nome) " << endl;
                 cout << "6-- Para sair" << endl;
                 cin >> funcaoID;
-
+                // Funcao 1
                 if (funcaoID == 1)
                 {
                     imprimirArquivoGerente();
                 }
-                if (funcaoID == 2)
+                // Funcao 2
+                else if (funcaoID == 2)
                 {
                     verificarRemedio();
                 }
-                if (funcaoID == 3)
+                // Funcao 3
+                else if (funcaoID == 3)
                 {
                     adicionarMedicamento();
                 }
-                if (funcaoID == 4)
+                // Funcao 4
+                else if (funcaoID == 4)
                 {
                     atualizarPreco();
                 }
-                if (funcaoID == 5)
+                // Funcao 5
+                else if (funcaoID == 5)
                 {
                     excluirMedicamento();
                 }
-                if (funcaoID == 6)
+                // Funcao 6
+                else if (funcaoID == 6)
                 {
+                    salvarMapNoArquivo();
+                    break;
+                }
+                else
+                {
+                    salvarMapNoArquivo();
+                    cout << "Opção inválida.";
                     break;
                 }
             }
         }
+        // Se a senha não for certa
         else
         {
             cout << "Senha errada!" << endl;
         }
     }
+    // Caso seja digitado um numero de perfil diferente
     else
     {
         cout << "Perfil invalido" << endl;

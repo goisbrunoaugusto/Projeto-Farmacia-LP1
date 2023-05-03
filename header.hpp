@@ -3,7 +3,6 @@
 
 void verificarRemedio();
 void imprimirArquivo();
-void inicializarArquivo();
 void adicionarArquivoNoMapa();
 void selecionarRemedio();
 void calculoCompra();
@@ -12,6 +11,7 @@ void imprimirArquivoGerente();
 void adicionarMedicamento();
 void atualizarPreco();
 void excluirMedicamento();
+void salvarMapNoArquivo();
 
 
 #endif
